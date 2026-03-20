@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>출애굽기 — EXODUS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0500;font-family:'Crimson Text',serif;overflow:hidden;height:100vh;width:100vw;}
+#gc{position:relative;width:100%;height:100%;overflow:hidden;}
+#bg{position:absolute;inset:0;transition:background 2.5s ease;z-index:0;}
+.bg0{background:linear-gradient(180deg,#1a0a00 0%,#2d1500 40%,#8b6914 70%,#c4960a 100%);}
+.bg1{background:linear-gradient(180deg,#0d1a2e 0%,#1a2d1a 30%,#5c4a0a 65%,#8b7020 100%);}
+.bg2{background:linear-gradient(180deg,#0a0a0a 0%,#1a1520 25%,#2a1a0a 50%,#4a3010 75%,#6a4820 100%);}
+.bg3{background:linear-gradient(180deg,#1a0808 0%,#2d1010 30%,#5c2a0a 60%,#8a4a1a 80%,#a06020 100%);}
+.bg4{background:linear-gradient(180deg,#0a0d1a 0%,#0d1a3a 35%,#1a3a6e 55%,#5c8020 75%,#8b7a1a 100%);}
+.bgl{position:absolute;bottom:30%;left:0;right:0;opacity:0;transition:opacity 2.5s ease;will-change:transform;}
+.bgl.vis{opacity:1;}
+.pyr{position:absolute;bottom:0;border-style:solid;border-color:transparent;}
+.p1{border-width:0 80px 120px 80px;border-bottom-color:#3d2000;left:5%;}
+.p2{border-width:0 120px 180px 120px;border-bottom-color:#2a1500;left:18%;}
+.p3{border-width:0 70px 100px 70px;border-bottom-color:#3d2000;right:8%;}
+.p4{border-width:0 100px 150px 100px;border-bottom-color:#2a1500;right:20%;}
+.rb{position:absolute;bottom:0;background:linear-gradient(160deg,#5a4a2a,#3a2a10);border-radius:40% 60% 0 0/60% 40% 0 0;}
+.rb1{width:90px;height:55px;left:8%;}.rb2{width:140px;height:80px;left:25%;background:linear-gradient(160deg,#4a3a1a,#2a1a08);}
+.rb3{width:70px;height:40px;right:15%;}.rb4{width:110px;height:65px;right:30%;background:linear-gradient(160deg,#4a3a1a,#2a1a08);}
+.mt{position:absolute;bottom:0;background:linear-gradient(160deg,#2a1e14,#1a1008);border-radius:30% 70% 0 0/50% 50% 0 0;}
+.mt1{width:200px;height:160px;left:10%;}.mt2{width:280px;height:220px;left:30%;background:linear-gradient(160deg,#1e1610,#0e0a06);}
+.mt3{width:180px;height:140px;right:12%;}.mt4{width:240px;height:190px;right:28%;background:linear-gradient(160deg,#1e1610,#0e0a06);}
+.lgtn{position:absolute;top:5%;left:48%;width:3px;height:60px;background:linear-gradient(180deg,#ffffaa,#ffff00,transparent);opacity:0;animation:lgF 3s ease-in-out infinite;}
+@keyframes lgF{0%,85%,100%{opacity:0;}87%,92%{opacity:1;}89%,94%{opacity:.3;}}
+.mh{position:absolute;bottom:0;border-radius:50% 50% 0 0/40% 40% 0 0;}
+.mh1{width:300px;height:80px;left:5%;background:linear-gradient(180deg,#6a2a0a,#3a1808);}
+.mh2{width:200px;height:55px;left:35%;background:linear-gradient(180deg,#7a3210,#4a2010);}
+.mh3{width:260px;height:70px;right:8%;background:linear-gradient(180deg,#6a2a0a,#3a1808);}
+.mf{position:absolute;bottom:0;width:8px;background:linear-gradient(180deg,#ff8800,#ff4400,#cc2200);border-radius:4px 4px 0 0;animation:mfF .3s ease-in-out infinite alternate;}
+.mf1{height:40px;left:20%;}.mf2{height:55px;left:55%;}.mf3{height:35px;right:18%;}
+@keyframes mfF{from{transform:scaleX(1);opacity:.8;}to{transform:scaleX(.7);opacity:1;}}
+.clf{position:absolute;bottom:0;background:linear-gradient(180deg,#2a3a5a,#1a2a4a);border-radius:10px 30px 0 0;}
+.cl1{width:180px;height:100px;left:5%;}.cl2{width:140px;height:75px;right:10%;background:linear-gradient(180deg,#1a2a4a,#0a1a3a);}
+.wvb{position:absolute;bottom:0;height:30px;background:linear-gradient(180deg,#1a6699aa,#0a3d5c88);border-radius:50% 50% 0 0;animation:wvR 2s ease-in-out infinite alternate;}
+.wv1{width:200px;left:20%;}.wv2{width:160px;left:45%;animation-delay:.6s;}.wv3{width:220px;right:5%;animation-delay:1.2s;}
+@keyframes wvR{from{transform:scaleX(1) translateY(0);opacity:.6;}to{transform:scaleX(1.05) translateY(-5px);opacity:1;}}
+#ground{position:absolute;bottom:0;left:0;right:0;height:30%;transition:background 2.5s ease;overflow:hidden;z-index:1;}
+#ground::after{content:'';position:absolute;top:0;left:0;width:200%;height:6px;
+  background:repeating-linear-gradient(90deg,#c4960a33 0px,#c4960a33 30px,transparent 30px,transparent 70px);
+  animation:gS .4s linear infinite;}
+@keyframes gS{from{transform:translateX(0);}to{transform:translateX(-70px);}}
+.g0{background:linear-gradient(180deg,#8b6914 0%,#5c4008 40%,#3d2800 100%);}
+.g1{background:linear-gradient(180deg,#6b5a1a 0%,#4a3a0a 40%,#2a2000 100%);}
+.g2{background:linear-gradient(180deg,#4a3a2a 0%,#2a2018 40%,#1a1008 100%);}
+.g3{background:linear-gradient(180deg,#7a3a1a 0%,#5a2810 40%,#3a1808 100%);}
+.g4{background:linear-gradient(180deg,#3a5a2a 0%,#2a4020 40%,#1a2a10 100%);}
+#sand{position:absolute;bottom:29%;left:0;right:0;height:12px;background:linear-gradient(90deg,transparent,#c4960a44,#f0c04066,#c4960a44,transparent);animation:sandS .6s linear infinite;z-index:2;}
+@keyframes sandS{from{transform:translateX(0);}to{transform:translateX(-40px);}}
+.star{position:absolute;background:#fff;border-radius:50%;animation:tw 2s infinite alternate;}
+@keyframes tw{from{opacity:.3;}to{opacity:1;}}
+#moon{position:absolute;top:8%;right:12%;width:50px;height:50px;background:radial-gradient(circle at 35% 35%,#fff8dc,#f0c040);border-radius:50%;box-shadow:0 0 30px #f0c04088,0 0 60px #f0c04044;animation:mG 3s ease-in-out infinite alternate;z-index:1;}
+@keyframes mG{from{box-shadow:0 0 30px #f0c04088;}to{box-shadow:0 0 60px #f0c040cc;}}
+#hud{position:absolute;top:0;left:0;right:0;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,#00000088,transparent);z-index:100;}
+.ht{font-family:'Cinzel',serif;font-size:12px;color:#c4960a;letter-spacing:3px;}
+.hs{font-family:'Cinzel',serif;font-size:18px;color:#f0c040;text-shadow:0 0 10px #f0c04088;}
+.hl{font-size:16px;}
+.hp{font-family:'Cinzel',serif;font-size:11px;color:#d4a0ff;display:none;animation:pp .5s ease-in-out infinite alternate;}
+@keyframes pp{from{opacity:.7;}to{opacity:1;text-shadow:0 0 10px #d4a0ff;}}
+#pbar{position:absolute;bottom:10px;left:16px;right:16px;z-index:100;}
+.plbl{font-family:'Cinzel',serif;font-size:9px;color:#c4960a88;letter-spacing:1px;margin-bottom:3px;text-align:center;}
+.ptrk{height:6px;background:#ffffff11;border-radius:3px;border:1px solid #c4960a33;overflow:hidden;}
+.pfil{height:100%;background:linear-gradient(90deg,#c4960a,#f0c040,#80ffaa);border-radius:3px;transition:width .3s;box-shadow:0 0 8px #f0c04066;}
+#player{position:absolute;width:32px;height:52px;z-index:10;}
+#player.sliding{transform-origin:bottom center;transform:scaleY(.45) translateY(10px);transition:transform .08s ease-out;}
+#player:not(.sliding){transition:transform .1s ease-out;}
+.mr{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:22px;height:36px;background:linear-gradient(180deg,#e8d5a3,#d4b96a);border-radius:3px 3px 8px 8px;}
+.mhd{position:absolute;top:0;left:50%;transform:translateX(-50%);width:16px;height:16px;background:#c4865a;border-radius:50%;}
+.mbd{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:12px;height:8px;background:#e8e0d0;border-radius:2px 2px 6px 6px;}
+.mst{position:absolute;bottom:2px;right:-4px;width:4px;height:48px;background:linear-gradient(180deg,#8b5e1a,#5c3a0a);border-radius:2px;}
+.sg{position:absolute;top:0;left:-4px;width:12px;height:12px;background:radial-gradient(circle,#80ffaa,transparent);border-radius:50%;animation:sgA 1.5s ease-in-out infinite;}
+@keyframes sgA{0%,100%{opacity:.4;transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
+#player.powered::after{content:'';position:absolute;top:-8px;left:-10px;width:52px;height:70px;background:radial-gradient(ellipse,#d090ff66 0%,#8040cc33 40%,transparent 70%);border-radius:50%;animation:au .3s ease-in-out infinite alternate;z-index:-1;}
+@keyframes au{from{transform:scale(1);opacity:.7;}to{transform:scale(1.15);opacity:1;}}
+.obs{position:absolute;z-index:8;}
+.sh{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:16px;height:10px;background:#c4960a;border-radius:50% 50% 0 0;}
+.sd{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:14px;height:14px;background:#c4865a;border-radius:50%;}
+.sb{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:30px;background:linear-gradient(180deg,#8b1a00,#6b1200);border-radius:2px;}
+.sp{position:absolute;top:4px;right:-6px;width:3px;height:44px;background:#8b5e1a;border-radius:1px;}
+.spt{position:absolute;top:-6px;left:-2px;width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-bottom:8px solid #c0c0c0;}
+.swl,.swr{position:absolute;bottom:6px;width:18px;height:12px;background:#2a7a2a;border-radius:60% 0 0 40%;animation:scW .3s ease-in-out infinite alternate;}
+.swl{left:-8px;transform-origin:right center;}.swr{right:-8px;border-radius:0 60% 40% 0;transform-origin:left center;animation-delay:.15s;}
+.scb{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:30px;height:20px;background:radial-gradient(circle at 40% 40%,#1a5c1a,#0a3a0a);border-radius:50% 50% 40% 40%;box-shadow:0 0 8px #00aa0044;}
+@keyframes scW{from{transform:rotateY(0);}to{transform:rotateY(30deg);}}
+.sprj{position:absolute;height:5px;background:linear-gradient(90deg,#c0c0c0,#8b5e1a);border-radius:2px;z-index:8;}
+.sprj::before{content:'';position:absolute;right:-8px;top:-4px;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid #c0c0c0;}
+/* 십자가 */
+.cw{position:absolute;width:30px;height:38px;z-index:15;}
+.ci{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:30px;height:38px;animation:ciF .9s ease-in-out infinite alternate;}
+.ci::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:8px;height:38px;background:linear-gradient(180deg,#fff8dc,#f0c040,#c4960a);border-radius:3px;box-shadow:0 0 12px #f0c040cc;}
+.ci::after{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:30px;height:8px;background:linear-gradient(90deg,#c4960a,#f0c040,#fff8dc,#f0c040,#c4960a);border-radius:3px;box-shadow:0 0 12px #f0c040cc;}
+@keyframes ciF{from{transform:translateX(-50%) translateY(0) rotate(-3deg);filter:drop-shadow(0 0 8px #f0c040aa);}
+  to{transform:translateX(-50%) translateY(-7px) rotate(3deg);filter:drop-shadow(0 0 18px #fffde0);}}
+/* 메추라기 */
+.qi{position:absolute;width:24px;height:20px;animation:qiF .9s ease-in-out infinite alternate;z-index:15;}
+@keyframes qiF{from{transform:translateY(0);}to{transform:translateY(-6px);}}
+/* 파라오 */
+#pharaoh{position:absolute;bottom:30%;width:70px;height:90px;z-index:20;display:none;}
+.phc{position:absolute;top:0;left:50%;transform:translateX(-50%);width:30px;height:18px;background:linear-gradient(180deg,#f0c040,#c4960a);clip-path:polygon(0% 100%,20% 0%,40% 60%,60% 0%,80% 60%,100% 0%,100% 100%);}
+.phh{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:#c4865a;border-radius:50%;border:2px solid #f0c040;}
+.phb{position:absolute;top:42px;left:50%;transform:translateX(-50%);width:38px;height:40px;background:linear-gradient(180deg,#8b1a00,#5a0a00);border-radius:4px 4px 12px 12px;}
+.phf{position:absolute;top:36px;right:2px;width:4px;height:30px;background:#c4960a;border-radius:2px;transform-origin:top center;animation:phfS .6s ease-in-out infinite alternate;}
+@keyframes phfS{from{transform:rotate(-30deg);}to{transform:rotate(30deg);}}
+/* 파라오 경고 */
+#ba{position:absolute;inset:0;z-index:180;display:none;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
+#ba.on{display:flex;animation:baB .25s step-end infinite;}
+@keyframes baB{0%,100%{background:rgba(180,0,0,.18);}50%{background:rgba(180,0,0,.38);}}
+.ab{position:absolute;inset:0;border:6px solid #ff2200;animation:abP .3s step-end infinite;pointer-events:none;}
+@keyframes abP{0%,100%{opacity:1;}50%{opacity:.2;}}
+.at{font-family:'Cinzel',serif;font-size:clamp(20px,5vw,36px);color:#ff2200;letter-spacing:6px;text-shadow:0 0 30px #ff2200,0 0 60px #ff000088;animation:atP .4s ease-in-out infinite alternate;}
+@keyframes atP{from{transform:scale(1);opacity:.85;}to{transform:scale(1.08);opacity:1;}}
+.as{font-family:'Cinzel',serif;font-size:clamp(10px,2vw,14px);color:#ffaa88;letter-spacing:4px;margin-top:10px;text-shadow:0 0 10px #ff4400;}
+/* 재앙 */
+#po{position:absolute;inset:0;pointer-events:none;z-index:88;opacity:0;transition:opacity .4s;}
+#po.pl{background:rgba(80,60,0,.32);}#po.pd{background:rgba(0,0,0,.72);}#po.ph{background:rgba(180,220,255,.18);}
+#plbl{position:absolute;top:15%;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:13px;color:#ffddaa;letter-spacing:2px;text-shadow:0 0 12px #ff6600,0 2px 4px #000;background:#00000066;padding:6px 16px;border-radius:20px;border:1px solid #ff660044;opacity:0;pointer-events:none;z-index:96;white-space:nowrap;transition:opacity .4s;}
+/* 배너 */
+#sb{position:absolute;top:20%;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:14px;color:#f0c040;letter-spacing:4px;text-shadow:0 0 20px #f0c040;text-align:center;opacity:0;pointer-events:none;z-index:95;white-space:nowrap;transition:opacity .5s;}
+/* 레인 인디케이터 */
+#li{position:absolute;left:14px;z-index:99;display:flex;flex-direction:column;gap:6px;}
+.ld{width:7px;height:7px;border-radius:50%;background:#c4960a44;transition:all .15s;}
+.ld.on{background:#f0c040;transform:scale(1.4);}
+/* 하나님 이펙트 */
+#ge{position:absolute;inset:0;pointer-events:none;z-index:90;display:none;}
+.gr{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;height:70%;background:conic-gradient(from 260deg at 50% 0%,transparent 0deg,#d090ff33 8deg,transparent 14deg,transparent 22deg,#a060cc44 28deg,transparent 34deg,transparent 46deg,#d4a0ff33 50deg,transparent 56deg,transparent 64deg,#d090ff44 70deg,transparent 76deg,transparent 90deg,#a060cc33 96deg,transparent 100deg);animation:grA 4s linear infinite;opacity:0;}
+@keyframes grA{from{transform:translateX(-50%) rotate(0);opacity:1;}80%{opacity:1;}to{transform:translateX(-50%) rotate(20deg);opacity:.6;}}
+.gha{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:120px;height:120px;background:radial-gradient(circle,#d4a0ffff 0%,#8040cc99 30%,#6030aa44 60%,transparent 80%);border-radius:50%;animation:ghaP .8s ease-in-out infinite alternate;}
+@keyframes ghaP{from{transform:translateX(-50%) scale(1);}to{transform:translateX(-50%) scale(1.3);}}
+.gtx{position:absolute;top:10%;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:13px;color:#d4a0ff;letter-spacing:4px;text-shadow:0 0 20px #a060ff,0 0 40px #8040cc;white-space:nowrap;animation:gtF .4s ease-in-out infinite alternate;}
+@keyframes gtF{from{opacity:.8;}to{opacity:1;text-shadow:0 0 30px #d4a0ff,0 0 60px #a060ff;}}
+.gp{position:absolute;width:4px;height:4px;background:#a060ff;border-radius:50%;animation:gpF linear forwards;box-shadow:0 0 6px #a060ff;}
+@keyframes gpF{0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(200px) scale(0);opacity:0;}}
+/* 먼지/플래시 */
+.dust{position:absolute;width:6px;height:6px;background:#c4960a44;border-radius:50%;animation:dF .6s ease-out forwards;pointer-events:none;z-index:5;}
+@keyframes dF{from{transform:translateY(0) scale(1);opacity:.6;}to{transform:translateY(-15px) scale(2);opacity:0;}}
+.flash{position:absolute;inset:0;opacity:0;z-index:300;pointer-events:none;animation:flA .3s ease-out forwards;}
+@keyframes flA{0%{opacity:.8;}100%{opacity:0;}}
+@keyframes hailFall{from{transform:translateY(0) rotate(15deg);opacity:1;}to{transform:translateY(100vh) rotate(15deg);opacity:.5;}}
+/* 클리어 */
+#ce{position:absolute;inset:0;z-index:400;display:none;overflow:hidden;}
+#csl,#csr{position:absolute;bottom:0;width:50%;height:32%;background:linear-gradient(180deg,#1a8aaa,#0a4d6e,#062a40);z-index:5;}
+#csl{left:0;animation:csL 2s cubic-bezier(.4,0,.2,1) .3s both;}
+#csr{right:0;animation:csR 2s cubic-bezier(.4,0,.2,1) .3s both;}
+@keyframes csL{from{transform:translateX(50%);}to{transform:translateX(0);}}
+@keyframes csR{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+#cry{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:200%;height:140%;background:conic-gradient(from 270deg at 50% 0%,transparent 0deg,#fff8c033 5deg,transparent 10deg,transparent 18deg,#f0c04044 22deg,transparent 27deg,transparent 35deg,#fffde055 38deg,transparent 43deg,transparent 52deg,#fff8c033 55deg,transparent 60deg,transparent 68deg,#f0c04044 72deg,transparent 77deg,transparent 85deg,#fffde055 88deg,transparent 93deg,transparent 100deg);animation:cryA 4s linear infinite;}
+@keyframes cryA{from{transform:translateX(-50%) rotate(0);}to{transform:translateX(-50%) rotate(360deg);}}
+#crl{position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:100%;background:linear-gradient(180deg,#fffde0ff 0%,#f0c04088 30%,transparent 70%);animation:crlA 1.5s ease-in-out infinite alternate;}
+@keyframes crlA{from{opacity:.7;width:200px;}to{opacity:1;width:360px;}}
+#crb{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:120px;height:120px;background:radial-gradient(circle,#ffffff 0%,#fff8c0 30%,#f0c040 60%,transparent 80%);border-radius:50%;box-shadow:0 0 60px #fffde0,0 0 120px #f0c04088;animation:crbA 2.5s cubic-bezier(.2,0,.4,1) forwards;}
+@keyframes crbA{from{top:-120px;opacity:0;transform:translateX(-50%) scale(.3);}60%{opacity:1;}to{top:8%;opacity:1;transform:translateX(-50%) scale(1);}}
+#crt{position:absolute;top:26%;left:50%;transform:translateX(-50%);text-align:center;opacity:0;animation:crtA 1s ease-out 2.2s forwards;}
+@keyframes crtA{from{opacity:0;transform:translateX(-50%) translateY(20px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+.ctl{font-family:'Cinzel',serif;font-size:clamp(22px,5vw,38px);color:#fff8dc;letter-spacing:8px;text-shadow:0 0 30px #f0c040,0 0 60px #c4960a88;display:block;margin-bottom:12px;}
+.ctv{font-family:'Crimson Text',serif;font-style:italic;font-size:clamp(11px,2vw,15px);color:#f0c040cc;letter-spacing:1px;max-width:460px;line-height:1.8;display:block;padding:0 20px;}
+#cbn{position:absolute;bottom:12%;left:50%;transform:translateX(-50%);opacity:0;animation:crtA .8s ease-out 4.2s forwards;}
+.crp{position:absolute;border-radius:50%;animation:crpA linear forwards;pointer-events:none;}
+@keyframes crpA{from{transform:translateY(0) scale(1);opacity:1;}to{transform:translateY(-60vh) scale(0);opacity:0;}}
+/* 화면 */
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;background:radial-gradient(ellipse at center,#1a0a0088,#0a050099);backdrop-filter:blur(3px);}
+.screen h1{font-family:'Cinzel',serif;font-size:32px;color:#f0c040;text-shadow:0 0 30px #f0c040,0 0 60px #c4960a;letter-spacing:6px;margin-bottom:8px;text-align:center;}
+.screen h2{font-family:'Cinzel',serif;font-size:16px;color:#c4960a;letter-spacing:4px;margin-bottom:28px;text-align:center;}
+.screen p{font-size:14px;color:#d4b96a99;letter-spacing:1px;margin-bottom:5px;text-align:center;}
+.btn{font-family:'Cinzel',serif;font-size:13px;color:#0a0500;background:linear-gradient(135deg,#f0c040,#c4960a);border:none;padding:12px 36px;border-radius:2px;cursor:pointer;letter-spacing:3px;margin-top:18px;transition:all .2s;}
+.btn:hover{transform:scale(1.05);box-shadow:0 0 20px #f0c04088;}
+.verse{font-style:italic;font-size:11px;color:#c4960a66;max-width:360px;text-align:center;line-height:1.7;margin-top:14px;padding:0 20px;}
+/* 모바일 */
+#mc{position:absolute;bottom:28px;left:0;right:0;display:none;justify-content:space-between;padding:0 18px;z-index:150;}
+.mb{width:58px;height:58px;background:#ffffff22;border:2px solid #c4960a44;border-radius:50%;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-user-select:none;}
+#msld{font-size:12px;font-family:'Cinzel',serif;letter-spacing:0;}
+@media(max-width:600px){#mc{display:flex;}#pbar{bottom:100px;}}
+#mbt{position:absolute;top:38px;left:50%;transform:translateX(-50%);background:none;border:1px solid #c4960a44;color:#c4960a;font-size:12px;padding:3px 10px;border-radius:20px;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:2px;z-index:200;}
+</style>
+</head>
+<body>
+<div id="gc">
+  <div id="bg" class="bg0"></div>
+  <div id="strs"></div>
+  <div id="moon"></div>
+  <!-- 배경 레이어 0~4 -->
+  <div id="bl0" class="bgl vis"><div class="pyr p1"></div><div class="pyr p2"></div><div class="pyr p3"></div><div class="pyr p4"></div></div>
+  <div id="bl1" class="bgl"><div class="rb rb1"></div><div class="rb rb2"></div><div class="rb rb3"></div><div class="rb rb4"></div></div>
+  <div id="bl2" class="bgl"><div class="mt mt1"></div><div class="mt mt2"></div><div class="mt mt3"></div><div class="mt mt4"></div><div class="lgtn"></div></div>
+  <div id="bl3" class="bgl"><div class="mh mh1"></div><div class="mh mh2"></div><div class="mh mh3"></div><div class="mf mf1"></div><div class="mf mf2"></div><div class="mf mf3"></div></div>
+  <div id="bl4" class="bgl"><div class="clf cl1"></div><div class="clf cl2"></div><div class="wvb wv1"></div><div class="wvb wv2"></div><div class="wvb wv3"></div></div>
+  <div id="ground" class="g0"></div>
+  <div id="sand"></div>
+  <!-- HUD -->
+  <div id="hud">
+    <div class="ht">출애굽기</div>
+    <div style="text-align:center"><div class="hs" id="sc">0</div><div class="hp" id="pw">✝ 십자가의 가호</div></div>
+    <div class="hl" id="lv">❤️❤️❤️</div>
+  </div>
+  <button id="mbt">🎵</button>
+  <!-- 플레이어 -->
+  <div id="player"><div class="mst"><div class="sg"></div></div><div class="mhd"></div><div class="mbd"></div><div class="mr"></div></div>
+  <div id="od"></div>
+  <!-- 프로그레스 바 -->
+  <div id="pbar"><div class="plbl">🏺 이집트 — 🌵 광야 — ⛰️ 시내산 — 🔥 모압 — 🌊 홍해 ✨</div><div class="ptrk"><div class="pfil" id="pf" style="width:0%"></div></div></div>
+  <!-- 레인 인디케이터 -->
+  <div id="li" style="top:64%"><div class="ld" id="dhi"></div><div class="ld on" id="dlo"></div></div>
+  <!-- 재앙 -->
+  <div id="po"></div><div id="plbl"></div>
+  <!-- 파라오 -->
+  <div id="pharaoh"><div class="phc"></div><div class="phh"></div><div class="phb"></div><div class="phf"></div></div>
+  <!-- 파라오 경고 -->
+  <div id="ba"><div class="ab"></div><div class="at">⚠ 파라오가 나타났다 ⚠</div><div class="as">PHARAOH APPROACHES</div></div>
+  <!-- 하나님 이펙트 -->
+  <div id="ge"><div class="gr"></div><div class="gha"></div><div class="gtx">✝ 십자가의 힘이 임하다</div></div>
+  <!-- 배너 -->
+  <div id="sb"></div>
+  <!-- 클리어 -->
+  <div id="ce"><div id="csl"></div><div id="csr"></div><div id="cry"></div><div id="crl"></div><div id="crb"></div>
+    <div id="crt"><span class="ctl">자유를 얻었노라</span><span class="ctv">"모세가 바다 위로 손을 내밀매<br>여호와께서 큰 동풍으로 밤새도록 바닷물을 물러가게 하시니<br>물이 갈라져 이스라엘 자손이 바다 가운데를 건넜더라"<br>— 출애굽기 14:21</span></div>
+    <div id="cbn"><button class="btn" id="cr">다시 탈출</button></div>
+  </div>
+  <!-- 모바일 -->
+  <div id="mc"><div class="mb" id="mjp">↑</div><div class="mb" id="msld" style="font-size:12px;font-family:'Cinzel',serif;">↓슬라이드</div></div>
+  <!-- 시작 -->
+  <div class="screen" id="ss">
+    <h1>출애굽기</h1><h2>EXODUS</h2>
+    <p>모세를 이끌어 이집트를 탈출하라</p>
+    <p style="font-size:12px;color:#c4960a66;margin-top:4px;">↑ / Space — 점프 (더블점프)</p>
+    <p style="font-size:12px;color:#c4960a66;margin-top:2px;">↓ 누르는 동안 — 슬라이드</p>
+    <p style="font-size:11px;color:#c4960a55;margin-top:2px;">✝ 십자가=무적 &nbsp;·&nbsp; 🐦 메추라기=체력 &nbsp;·&nbsp; 👑 파라오 조심!</p>
+    <button class="btn" id="stb">탈출 시작</button>
+    <div class="verse">"내가 내 백성의 고통을 분명히 보고 그들의 부르짖음을 들었노라" — 출애굽기 3:7</div>
+  </div>
+  <!-- 게임오버 -->
+  <div class="screen" id="os" style="display:none">
+    <h1 style="font-size:24px;color:#ff4422;">파라오에게 잡혔다!</h1><h2 style="color:#ff6644;">CAPTURED</h2>
+    <p>이동 거리: <span id="osc" style="color:#f0c040">0</span></p>
+    <p>최고 기록: <span id="bsc" style="color:#f0c040">0</span></p>
+    <button class="btn" id="rtb">다시 탈출</button>
+    <div class="verse">"두려워하지 말라 오직 믿고 가라" — 출애굽기 14:13</div>
+  </div>
+</div>
+<script>
+// ══ CONSTANTS ══
+const TARGET=5000, BOSS_AT=[1050,3050], LY=[30,46], G=0.58, JV=-12, IDUR=70;
+
+// ══ DOM ══
+const gc=document.getElementById('gc'), bgEl=document.getElementById('bg'), groundEl=document.getElementById('ground');
+const player=document.getElementById('player'), od=document.getElementById('od');
+const scEl=document.getElementById('sc'), pwEl=document.getElementById('pw'), lvEl=document.getElementById('lv'), pfEl=document.getElementById('pf');
+const dhi=document.getElementById('dhi'), dlo=document.getElementById('dlo');
+const poEl=document.getElementById('po'), plblEl=document.getElementById('plbl');
+const pharaoh=document.getElementById('pharaoh'), baEl=document.getElementById('ba');
+const geEl=document.getElementById('ge'), sbEl=document.getElementById('sb'), ceEl=document.getElementById('ce');
+const bls=[0,1,2,3,4].map(i=>document.getElementById('bl'+i));
+
+// ══ STARS ══
+const sd=document.getElementById('strs'); sd.style.cssText='position:absolute;top:0;left:0;right:0;height:45%;overflow:hidden;';
+for(let i=0;i<55;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*2.5+.5;s.style.cssText=`width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${1.5+Math.random()*2}s;`;sd.appendChild(s);}
+
+// ══ STATE ══
+let gs='idle', score=0, best=0, lives=3, spd=2.5, frm=0, raf=null;
+let px=100,py=0,vy=0,jl=2, lane=0, slid=false, slidT=0, inv=0;
+let hasPow=false, powT=0, gpT=0, gT=0;
+let obs=[], heals=[], nHeal=600+ri(400), spT=0, spI=90;
+let stg=0, pyrOff=0;
+let plagOn=false, plagT=0, plagTy='', nPlag=450;
+let bossOn=false, bossX=0, bossP=0, bossT=0, bBuls=[], bIdx=0;
+const keys={}, mob={jmp:false,sld:false};
+function ri(n){return Math.floor(Math.random()*n);}
+function rf(a,b){return a+Math.random()*(b-a);}
+
+// ══ INPUT ══
+document.addEventListener('keydown',e=>{
+  if(keys[e.code])return; keys[e.code]=true;
+  if(gs!=='playing')return;
+  if(['ArrowUp','Space','KeyW'].includes(e.code)){doJump();e.preventDefault();}
+  if(['ArrowDown','KeyS'].includes(e.code)){startSlide();e.preventDefault();}
+});
+document.addEventListener('keyup',e=>{
+  keys[e.code]=false;
+  if(['ArrowDown','KeyS'].includes(e.code)&&slid)endSlide();
+});
+document.getElementById('mjp').addEventListener('touchstart',e=>{if(gs==='playing')doJump();e.preventDefault();},{passive:false});
+document.getElementById('msld').addEventListener('touchstart',e=>{mob.sld=true;if(gs==='playing')startSlide();e.preventDefault();},{passive:false});
+document.getElementById('msld').addEventListener('touchend',e=>{mob.sld=false;endSlide();e.preventDefault();},{passive:false});
+
+function doJump(){if(jl>0&&!slid){vy=JV;jl--;}}
+function startSlide(){
+  if(py>8){vy=Math.max(vy,9);return;}
+  if(slid)return;
+  slid=true;slidT=55;player.classList.add('sliding');
+}
+function endSlide(){slid=false;slidT=0;player.classList.remove('sliding');}
+
+// ══ MUSIC ══
+let actx=null,mOn=true,mPlay=false,mNodes=[],dInt=null,mTmr=null,bTmr=null;
+const SC=[73.42,77.78,92.50,98,110,116.54,130.81,146.83], SCH=SC.map(f=>f*2);
+const BPM=84,BT=60/BPM;
+function gAc(){if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx;}
+function pTone(f,tp,g,t,d,dt=0){const c=gAc(),o=c.createOscillator(),gn=c.createGain(),fl=c.createBiquadFilter();o.type=tp;o.frequency.setValueAtTime(f,t);o.detune.setValueAtTime(dt,t);fl.type='lowpass';fl.frequency.setValueAtTime(1200,t);gn.gain.setValueAtTime(0,t);gn.gain.linearRampToValueAtTime(g,t+.02);gn.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(fl);fl.connect(gn);gn.connect(c.destination);o.start(t);o.stop(t+d+.05);mNodes.push(o);}
+function drum(tp,t){const c=gAc();if(tp==='kick'){const o=c.createOscillator(),g=c.createGain();o.frequency.setValueAtTime(120,t);o.frequency.exponentialRampToValueAtTime(40,t+.15);g.gain.setValueAtTime(.8,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.35);mNodes.push(o);}else{const b=c.createBuffer(1,c.sampleRate*.1,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,tp==='snap'?8:3);const s=c.createBufferSource(),g=c.createGain(),fl=c.createBiquadFilter();fl.type=tp==='snap'?'bandpass':'highpass';fl.frequency.value=tp==='snap'?1200:3000;fl.Q.value=2;s.buffer=b;g.gain.setValueAtTime(tp==='snap'?.45:.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.1);s.connect(fl);fl.connect(g);g.connect(c.destination);s.start(t);s.stop(t+.2);mNodes.push(s);}}
+function dBar(t){[[0,'kick'],[BT*.5,'snap'],[BT*.75,'shake'],[BT,'snap'],[BT*1.5,'kick'],[BT*1.75,'shake'],[BT*2,'snap'],[BT*2.5,'snap'],[BT*2.75,'shake'],[BT*3,'kick'],[BT*3.5,'snap'],[BT*3.75,'shake']].forEach(([dt,tp])=>drum(tp,t+dt));}
+const MOT=[{d:7,r:.8},{d:6,r:.4},{d:4,r:.6},{d:2,r:.4},{d:1,r:.5},{d:0,r:1.2},{d:2,r:.4},{d:4,r:.6}];
+function sMel(t){if(!mPlay)return;let c=t;MOT.forEach(({d,r})=>{pTone(SCH[d%8],'sine',.22,c,r*.85,Math.random()*4-2);c+=r*BT;});const tot=MOT.reduce((s,n)=>s+n.r,0)*BT,rest=BT*(4+ri(4));mTmr=setTimeout(()=>sMel(c+rest-tot),(tot+rest-.1)*1000);}
+function sBass(t){if(!mPlay)return;[SC[0],SC[4],SC[0],SC[3]].forEach((f,i)=>{pTone(f,'sawtooth',.18,t+i*BT,BT*1.1);pTone(f*.5,'sine',.12,t+i*BT,BT*1.1);});const bl=BT*4;bTmr=setTimeout(()=>sBass(t+bl),(bl-.1)*1000);}
+function startMus(){if(mPlay||!mOn)return;mPlay=true;const c=gAc(),now=c.currentTime+.1;const bl=BT*4;let nb=now;dBar(nb);dInt=setInterval(()=>{if(!mPlay){clearInterval(dInt);return;}nb+=bl;dBar(nb);},bl*1000-50);sBass(now);setTimeout(()=>sMel(gAc().currentTime+.5),1000);}
+function stopMus(){mPlay=false;clearInterval(dInt);clearTimeout(mTmr);clearTimeout(bTmr);mNodes.forEach(n=>{try{n.stop();}catch(e){}});mNodes=[];}
+let mbOn=true;
+document.getElementById('mbt').addEventListener('click',()=>{mbOn=!mbOn;mOn=mbOn;document.getElementById('mbt').textContent=mbOn?'🎵':'🔇';if(mbOn&&gs==='playing')startMus();else stopMus();});
+
+// ══ STAGE ══
+const BGCL=['bg0','bg1','bg2','bg3','bg4'], GCL=['g0','g1','g2','g3','g4'];
+const SLBL=['🏺 이집트 — 병사와 풍뎅이','🌵 광야 — 창병과 바위','⛰️ 시내산 — 독사와 낙석','🔥 모압 — 기마병과 화살','🌊 홍해 앞 — 파라오 정예군'];
+function setStage(s){stg=s;bgEl.className=BGCL[s];groundEl.className=GCL[s];bls.forEach((l,i)=>l.classList.toggle('vis',i===s));showBanner(SLBL[s]);}
+function showBanner(t){sbEl.textContent=t;sbEl.style.opacity='1';setTimeout(()=>sbEl.style.opacity='0',2600);}
+
+// ══ HUD ══
+function updHUD(){scEl.textContent=score;lvEl.textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives);pwEl.style.display=hasPow?'block':'none';pfEl.style.width=Math.min(score/TARGET*100,100)+'%';dhi.classList.toggle('on',lane===1);dlo.classList.toggle('on',lane===0);}
+
+// ══ SPAWN ══
+function spawnObs(){
+  const r=Math.random(), ln=(score>500&&Math.random()<.35)?1:0, lb=LY[ln], sw=window.innerWidth+60;
+  let tp;
+  if(stg===0) tp=r<.07?'cross':r<.55?'soldier':'scarab';
+  else if(stg===1) tp=r<.07?'cross':r<.42?'spear':r<.72?'scarab_hi':'rock';
+  else if(stg===2) tp=r<.07?'cross':r<.42?'snake':r<.72?'boulder':'dark_sol';
+  else if(stg===3) tp=r<.07?'cross':r<.47?'rider':r<.77?'arrow':'fireball';
+  else tp=r<.07?'cross':r<.45?'elite_sol':r<.78?'spear_fast':'wave';
+
+  if(tp==='cross'){
+    const el=document.createElement('div');el.className='cw';
+    el.innerHTML='<div class="ci"></div>';
+    el.style.cssText=`position:absolute;left:${sw}px;bottom:${LY[0]+4}%;width:30px;height:38px;`;
+    od.appendChild(el);obs.push({el,x:sw,tp:'cross',lane:-1,w:30,h:9999,cross:true});return;
+  }
+  const el=document.createElement('div');el.className='obs';el.style.position='absolute';
+  el.style.bottom=lb+'%';el.style.left=sw+'px';
+  let w=28,h=50,ex={};
+  if(tp==='soldier'){el.innerHTML='<div class="sh"></div><div class="sd"></div><div class="sb"></div><div class="sp"><div class="spt"></div></div>';el.style.width='28px';el.style.height='50px';w=28;h=50;}
+  else if(tp==='elite_sol'){el.innerHTML='<div class="sh" style="background:#f0c040;width:20px;height:13px;"></div><div class="sd"></div><div class="sb" style="background:linear-gradient(180deg,#c4960a,#8b6914);width:24px;height:34px;"></div><div class="sp" style="height:54px;"><div class="spt"></div></div>';el.style.width='30px';el.style.height='55px';w=30;h=55;}
+  else if(tp==='scarab'){el.innerHTML='<div class="swl"></div><div class="scb"></div><div class="swr"></div>';el.style.width='36px';el.style.height='28px';w=36;h=28;}
+  else if(tp==='scarab_hi'){el.innerHTML='<div class="swl"></div><div class="scb"></div><div class="swr"></div>';el.style.bottom=(lb+12+Math.random()*10)+'%';el.style.width='36px';el.style.height='28px';el.style.filter='drop-shadow(0 0 6px #ff440066)';od.appendChild(el);obs.push({el,x:sw,tp:'scarab',lane:ln,w:36,h:28,slide:true});return;}
+  else if(tp==='spear'||tp==='spear_fast'){el.className='obs sprj';el.style.bottom=(LY[0]+2)+'%';el.style.width='44px';el.style.height='5px';od.appendChild(el);obs.push({el,x:sw,tp:'spear',lane:0,w:44,h:12,boost:tp==='spear_fast'?2.5:0});return;}
+  else if(tp==='arrow'){el.className='obs sprj';el.style.cssText+=`width:32px;height:4px;background:linear-gradient(90deg,#8b5e1a,#c0a060);`;el.style.bottom=(LY[ln]+3+Math.random()*8)+'%';od.appendChild(el);obs.push({el,x:sw,tp:'spear',lane:ln,w:32,h:10,boost:2});return;}
+  else if(tp==='rock'){el.style.cssText+=`width:50px;height:36px;background:linear-gradient(160deg,#5a4a2a,#3a2a10);border-radius:40% 60% 0 0/60% 40% 0 0;`;w=50;h=36;}
+  else if(tp==='boulder'){el.style.cssText+=`width:44px;height:44px;background:radial-gradient(circle at 35% 35%,#6a5a4a,#2a1e14);border-radius:50%;box-shadow:2px 3px 8px #0008;`;w=44;h=44;}
+  else if(tp==='snake'){el.style.cssText+=`width:38px;height:14px;background:linear-gradient(90deg,#2a5a1a,#1a3a0a);border-radius:8px 2px 2px 8px;`;el.innerHTML='<div style="position:absolute;left:-4px;top:1px;width:8px;height:10px;background:#3a7a2a;border-radius:50% 50% 20% 20%;"></div>';w=38;h=14;}
+  else if(tp==='dark_sol'){el.innerHTML='<div class="sh" style="background:#1a1a2a;"></div><div class="sd" style="background:#2a1a0a;"></div><div class="sb" style="background:linear-gradient(180deg,#1a1a3a,#0a0a1a);"></div><div class="sp" style="background:#3a3a3a;"><div class="spt" style="border-bottom-color:#8888aa;"></div></div>';el.style.width='28px';el.style.height='50px';w=28;h=50;}
+  else if(tp==='rider'){el.innerHTML='<div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:34px;height:28px;background:linear-gradient(180deg,#8b3a00,#5a2000);border-radius:4px 4px 0 0;"></div><div style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:#c4865a;border-radius:50%;border:2px solid #c4960a;"></div><div style="position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:44px;height:18px;background:linear-gradient(180deg,#6b4010,#4a2a08);border-radius:30% 30% 0 0;"></div>';el.style.width='44px';el.style.height='46px';w=44;h=46;}
+  else if(tp==='fireball'){el.style.bottom=(lb+8+Math.random()*8)+'%';el.style.cssText+=`width:22px;height:22px;background:radial-gradient(circle,#ffee00,#ff6600,#cc2200);border-radius:50%;box-shadow:0 0 16px #ff6600aa;`;od.appendChild(el);obs.push({el,x:sw,tp:'fireball',lane:ln,w:22,h:22,slide:true});return;}
+  else if(tp==='wave'){el.style.cssText+=`width:55px;height:30px;background:linear-gradient(180deg,#1a6699,#0a3d5c);border-radius:50% 50% 0 0;box-shadow:0 0 10px #1a669966;`;w=55;h=30;}
+  od.appendChild(el);obs.push({el,x:sw,tp,lane:ln,w,h,...ex});
+}
+
+// ══ HEAL (메추라기) ══
+function spawnHeal(){
+  const el=document.createElement('div');el.className='qi';
+  el.style.cssText=`position:absolute;left:${window.innerWidth+60}px;bottom:${LY[0]+5}%;`;
+  el.innerHTML='<div style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:18px;height:12px;background:linear-gradient(135deg,#c4865a,#8b5e3a);border-radius:50% 50% 40% 40%;"></div><div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:#c4865a;border-radius:50%;"></div><div style="position:absolute;bottom:16px;right:2px;width:8px;height:5px;background:#d49a6a;border-radius:0 50% 50% 0;transform:rotate(-20deg);"></div><div style="position:absolute;bottom:4px;left:2px;width:3px;height:5px;background:#c4960a;border-radius:1px;"></div>';
+  gc.appendChild(el);heals.push({el,x:window.innerWidth+60});
+}
+
+// ══ PLAGUE ══
+const PLAGUES=[{id:'locust',lbl:'🦗 메뚜기 재앙! — 높이 점프 금지!',cl:'pl'},{id:'dark',lbl:'🌑 흑암 재앙! — 조심하라!',cl:'pd'},{id:'hail',lbl:'🧊 우박 재앙!',cl:'ph'}];
+function trigPlague(){
+  plagOn=true;plagT=180;
+  const p=PLAGUES[ri(PLAGUES.length)];plagTy=p.id;
+  poEl.className=p.cl;poEl.style.opacity='1';
+  plblEl.textContent=p.lbl;plblEl.style.opacity='1';
+  setTimeout(()=>plblEl.style.opacity='0',2200);
+  if(plagTy==='locust')spawnLocust();
+}
+function endPlague(){plagOn=false;plagTy='';poEl.style.opacity='0';poEl.className='';}
+function spawnLocust(){
+  const ch=gc.offsetHeight, bpct=76;
+  const gPx=ch*LY[0]/100, lPx=ch*bpct/100, thr=lPx-gPx-22;
+  const sp=28, cnt=Math.ceil(window.innerWidth/sp)+6, sx=window.innerWidth+20;
+  for(let c=0;c<cnt;c++){
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;left:${sx+c*sp}px;bottom:${bpct}%;width:20px;height:14px;background:#6a5800;border-radius:50% 50% 40% 40%;box-shadow:0 0 5px #c8a800;z-index:8;`;
+    el.innerHTML='<div style="position:absolute;top:-4px;left:1px;width:7px;height:6px;background:#9a8400;border-radius:50%;animation:scW .13s infinite alternate;"></div><div style="position:absolute;top:-4px;right:1px;width:7px;height:6px;background:#9a8400;border-radius:50%;animation:scW .13s .07s infinite alternate;"></div>';
+    od.appendChild(el);obs.push({el,x:sx+c*sp,tp:'locust',lane:-1,w:20,h:0,locust:true,thr});
+  }
+}
+function spawnHail(){
+  for(let i=0;i<3+ri(3);i++){
+    const el=document.createElement('div');const dur=.4+Math.random()*.35;
+    el.style.cssText=`position:absolute;z-index:89;pointer-events:none;left:${Math.random()*100}%;top:-14px;width:${5+Math.random()*5}px;height:${10+Math.random()*8}px;background:linear-gradient(180deg,#eef8ff,#88bbdd);border-radius:4px 4px 2px 2px;box-shadow:0 0 6px #aaddff66;animation:hailFall ${dur}s linear forwards;`;
+    gc.appendChild(el);setTimeout(()=>{try{gc.removeChild(el);}catch(e){}},800);
+  }
+}
+
+// ══ BOSS ══
+function startBoss(){bossOn=true;bossP=1;bossT=0;bossX=window.innerWidth+20;pharaoh.style.display='block';pharaoh.style.left=bossX+'px';baEl.classList.add('on');setTimeout(()=>baEl.classList.remove('on'),2200);}
+function updBoss(){
+  bossT++;const TGT=window.innerWidth*.82;
+  if(bossP===1){bossX-=spd*.9;pharaoh.style.left=bossX+'px';if(bossX<TGT){bossP=2;bossT=0;}}
+  else if(bossP===2){pharaoh.style.left=TGT+'px';const iv=bossT<300?45:25;if(bossT%iv===0)spawnBul();if(bossT>600)bossP=3;}
+  else{bossX+=spd*1.5;pharaoh.style.left=bossX+'px';if(bossX>window.innerWidth+100){bossOn=false;pharaoh.style.display='none';bBuls.forEach(b=>b.el.remove());bBuls=[];}}
+}
+function spawnBul(){
+  const el=document.createElement('div');const sx=window.innerWidth*.82-20,tl=Math.random()<.5?0:1,sz=10+ri(7);
+  el.style.cssText=`position:absolute;left:${sx}px;bottom:${LY[tl]+8}%;width:${sz}px;height:${sz}px;background:radial-gradient(circle,#ffcc00,#ff4400);border-radius:50%;box-shadow:0 0 ${sz+4}px #ff6600;z-index:21;`;
+  gc.appendChild(el);bBuls.push({el,x:sx,spd:6+Math.random()*3+(bossT>300?2:0),lane:tl});
+}
+
+// ══ GOD EFFECT ══
+function showGod(){geEl.style.display='block';const t=geEl.querySelector('.gtx');if(t){t.style.opacity='1';t.style.transition='opacity .3s';}gT=120;}
+function hideGod(){geEl.style.display='none';player.classList.remove('powered');geEl.querySelectorAll('.gp').forEach(p=>p.remove());}
+function spawnGP(){const p=document.createElement('div');p.className='gp';const sz=3+Math.random()*5,dur=1.2+Math.random()*1.5;p.style.cssText=`left:${20+Math.random()*(window.innerWidth-40)}px;top:${5+Math.random()*20}%;width:${sz}px;height:${sz}px;animation-duration:${dur}s;background:${Math.random()>.5?'#d4a0ff':'#fff'};box-shadow:0 0 ${sz*2}px #a060ff;`;geEl.appendChild(p);setTimeout(()=>p.remove(),dur*1000);}
+
+// ══ MISC EFFECTS ══
+function flash(c='#fff'){const f=document.createElement('div');f.className='flash';f.style.background=c;gc.appendChild(f);setTimeout(()=>f.remove(),300);}
+function spawnDust(x){const d=document.createElement('div');d.className='dust';d.style.left=x+'px';d.style.bottom='30%';gc.appendChild(d);setTimeout(()=>d.remove(),600);}
+
+// ══ WIN ══
+function showWin(){
+  gs='win';stopMus();ceEl.style.display='block';
+  flash('#fffde0');setTimeout(()=>flash('#fff8c0'),300);
+  try{const c=gAc(),now=c.currentTime;[[146.83,0],[220,.15],[293.66,.3],[369.99,.45],[440,.6],[587.33,.9]].forEach(([f,t])=>pTone(f,'sine',.3,now+t,2.5-t*.3));pTone(73.42,'sine',.2,now,5);pTone(36.71,'sine',.15,now,6);}catch(e){}
+  for(let i=0;i<40;i++)setTimeout(()=>spawnCP(),i*80);
+  const lp=setInterval(()=>{if(gs!=='win'){clearInterval(lp);return;}spawnCP();},120);
+}
+function spawnCP(){const p=document.createElement('div');p.className='crp';const sz=4+Math.random()*10,dur=1.5+Math.random()*2;const col=['#f0c040','#ffffff','#80ffaa','#fffde0','#d4a0ff','#ffcc66'][ri(6)];p.style.cssText=`left:${10+Math.random()*80}%;bottom:${20+Math.random()*40}%;width:${sz}px;height:${sz}px;background:${col};box-shadow:0 0 ${sz}px ${col};animation-duration:${dur}s;animation-delay:${Math.random()*.5}s;`;ceEl.appendChild(p);setTimeout(()=>{try{p.remove();}catch(e){};},(dur+.5)*1000);}
+
+// ══ GAME OVER ══
+function gameOver(){gs='gameover';stopMus();if(score>best)best=score;document.getElementById('osc').textContent=score;document.getElementById('bsc').textContent=best;document.getElementById('os').style.display='flex';}
+
+// ══ GAME LOOP ══
+function loop(){
+  if(gs!=='playing')return;
+  frm++;score++;spd=2.5+score/600;
+
+  // 배경 시차
+  pyrOff+=spd*.04;
+  bls.forEach(l=>l.style.transform=`translateX(-${pyrOff}px)`);
+
+  // 스테이지 전환
+  const ns=score<1000?0:score<2000?1:score<3000?2:score<4000?3:4;
+  if(ns!==stg)setStage(ns);
+
+  // 물리
+  vy+=G;py-=vy;
+  if(py<=0){py=0;vy=0;jl=2;}
+
+  // 슬라이드 홀드 체크
+  if(slid&&!(keys['ArrowDown']||keys['KeyS']||mob.sld))endSlide();
+
+  // 플레이어 위치
+  const ch=gc.offsetHeight;
+  player.style.left=px+'px';
+  player.style.bottom=(LY[lane]+py/ch*100)+'%';
+  player.style.opacity=(inv>0&&Math.floor(inv/5)%2===0)?'0.3':'1';
+  if(hasPow)player.classList.add('powered');else player.classList.remove('powered');
+  if(frm%8===0&&py===0)spawnDust(px+8);
+
+  // 타이머
+  if(inv>0)inv--;
+  const canHit=inv<=0&&!hasPow;
+  if(hasPow){powT--;gpT++;if(gpT%3===0)spawnGP();if(powT<=0){hasPow=false;hideGod();}}
+  if(gT>0&&--gT===0){const t=geEl.querySelector('.gtx');if(t)t.style.opacity='0';}
+
+  // 재앙
+  if(!plagOn&&!bossOn&&score>=nPlag){trigPlague();nPlag=score+400+ri(250);}
+  if(plagOn){plagT--;if(plagTy==='hail'&&frm%8===0)spawnHail();if(plagT<=0)endPlague();}
+
+  // 보스
+  if(!bossOn&&bIdx<BOSS_AT.length&&score>=BOSS_AT[bIdx]){bIdx++;startBoss();}
+  if(bossOn)updBoss();
+
+  // 장애물 스폰
+  spT++;if(spT>=spI){spT=0;spI=Math.max(45,95-score/30);if(!bossOn&&plagTy!=='locust')spawnObs();}
+
+  // 메추라기
+  if(score>=nHeal){spawnHeal();nHeal=score+500+ri(400);}
+  for(let i=heals.length-1;i>=0;i--){
+    const h=heals[i];h.x-=spd;h.el.style.left=h.x+'px';
+    if(h.x<-40){h.el.remove();heals.splice(i,1);continue;}
+    if(h.x<px+28&&h.x+24>px+4){
+      if(lives<3){lives=Math.min(3,lives+1);flash('#ffdd88');showBanner('🐦 메추라기! 체력 회복!');}
+      else showBanner('🐦 메추라기! (체력 최대)');
+      h.el.remove();heals.splice(i,1);
+    }
+  }
+
+  // ── 충돌 ──
+  const pL=px+6, pR=px+26;
+  for(let i=obs.length-1;i>=0;i--){
+    const o=obs[i];
+    o.x-=spd+(o.boost||0);o.el.style.left=o.x+'px';
+    if(o.x+o.w<0||o.x>window.innerWidth+120){o.el.remove();obs.splice(i,1);continue;}
+    if(pL>=o.x+o.w-4||pR<=o.x+4)continue; // X 미스
+
+    // 십자가 픽업 (레인/높이 무관)
+    if(o.cross){hasPow=true;powT=300;gpT=0;o.el.remove();obs.splice(i,1);flash('#d4a0ff');showGod();continue;}
+
+    // 메뚜기 천장
+    if(o.locust){if(py>=o.thr&&canHit){lives--;inv=IDUR;flash('#aa8800');vy=8;if(lives<=0){gameOver();return;}}continue;}
+
+    // 레인 체크
+    if(o.lane>=0&&o.lane!==lane)continue;
+
+    // Y 충돌
+    if(py>=o.h)continue;
+    if(slid&&o.slide)continue;
+
+    if(canHit){lives--;inv=IDUR;o.el.remove();obs.splice(i,1);flash('#ff2200');vy=-4;if(lives<=0){gameOver();return;}}
+  }
+
+  // 보스 투사체
+  for(let i=bBuls.length-1;i>=0;i--){
+    const b=bBuls[i];b.x-=b.spd;b.el.style.left=b.x+'px';
+    if(b.x+12<0){b.el.remove();bBuls.splice(i,1);continue;}
+    if(pL<b.x+10&&pR>b.x+2&&lane===b.lane&&py<55&&canHit){lives--;inv=IDUR;flash('#ff2200');vy=-4;b.el.remove();bBuls.splice(i,1);if(lives<=0){gameOver();return;}}
+  }
+
+  if(score>=TARGET){showWin();return;}
+  updHUD();
+  raf=requestAnimationFrame(loop);
+}
+
+// ══ START GAME ══
+function startGame(){
+  if(raf)cancelAnimationFrame(raf);
+  stopMus();
+  gs='playing';score=0;lives=3;spd=2.5;frm=0;
+  px=100;py=0;vy=0;jl=2;lane=0;slid=false;slidT=0;inv=0;
+  hasPow=false;powT=0;gpT=0;gT=0;
+  pyrOff=0;stg=-1;
+  plagOn=false;plagT=0;plagTy='';nPlag=450;
+  bossOn=false;bossX=0;bossP=0;bossT=0;bIdx=0;
+  spT=0;spI=90;nHeal=600+ri(400);
+
+  obs.forEach(o=>o.el.remove());obs=[];
+  heals.forEach(h=>h.el.remove());heals=[];
+  bBuls.forEach(b=>b.el.remove());bBuls=[];
+
+  document.getElementById('ss').style.display='none';
+  document.getElementById('os').style.display='none';
+  ceEl.style.display='none';
+  player.classList.remove('sliding','powered');player.style.opacity='1';
+  pharaoh.style.display='none';baEl.classList.remove('on');
+  poEl.style.opacity='0';poEl.className='';plblEl.style.opacity='0';
+  geEl.style.display='none';
+
+  bls.forEach((l,i)=>{l.style.transition='none';l.classList.toggle('vis',i===0);});
+  bgEl.style.transition='none';bgEl.className='bg0';
+  groundEl.style.transition='none';groundEl.className='g0';
+  setTimeout(()=>{bls.forEach(l=>l.style.transition='');bgEl.style.transition='';groundEl.style.transition='';},100);
+
+  setStage(0);updHUD();startMus();
+  raf=requestAnimationFrame(loop);
+}
+
+document.getElementById('stb').addEventListener('click',startGame);
+document.getElementById('rtb').addEventListener('click',startGame);
+document.getElementById('cr').addEventListener('click',startGame);
+</script>
+</body>
+</html>
